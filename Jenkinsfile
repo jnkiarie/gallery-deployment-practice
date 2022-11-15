@@ -20,5 +20,20 @@ pipeline {
                 sh 'npm install uuid@8.1.0'
             }
         }
+        stage('Build App'){
+            steps{
+                sh 'npm build'
+            }
+        }
+        stage('Testing'){
+            steps{
+                sh 'npm test'
+
+                emailext body: 'Test Message',
+                subject: 'Test Failed',
+                to: 'jimmyn.kiarie@gmail.com'
+                
+            }
+        }
     }
 }
